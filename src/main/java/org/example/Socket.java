@@ -11,8 +11,8 @@ public class Socket extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/login_form.fxml"))));
-        stage.setTitle("Login Form");
+        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/server_form.fxml"))));
+        stage.setTitle("server Form");
         stage.centerOnScreen();
         stage.show();
 

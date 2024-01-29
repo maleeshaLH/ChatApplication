@@ -1,18 +1,33 @@
 package org.example.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class ClientFormcontroller {
+public class ClientFormcontroller implements Initializable {
 
+    public VBox messagContainer
+            ;
+    public ScrollPane scrollPane;
+    public ScrollPane pane;
     @FXML
     private AnchorPane root;
 
@@ -22,54 +37,151 @@ public class ClientFormcontroller {
     @FXML
     private TextField txtmessage;
 
-    Socket remoteSocket;
+    Socket socket;
     ServerSocket serverSocket;
     String message;
+    String replay;
+    DataInputStream dataInputStream;
+    DataOutputStream dataOutputStream;
+    BufferedReader bufferedReader;
+    String reply;
 
-public void initialize(){
-   // new Thread (()->{});
+    static boolean openWindow = false;
 
-        Scanner input = new Scanner(System.in);
-    //new Thread (()->{});
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        new Thread(() -> {
+            try {
 
-    try {
-         remoteSocket = new Socket("localhost", 3002);
-        System.out.println("3");
-        DataOutputStream dataOutputStream = new DataOutputStream(remoteSocket.getOutputStream());
-        System.out.println("4");
-        dataOutputStream.writeUTF("Hello server...!");
+                    socket = new Socket("localhost", 3001);
 
-        DataInputStream dataInputStream = new DataInputStream(remoteSocket.getInputStream());
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        String masssage ="";
-        String replay ="";
+                while (true){
+                    replay=dataInputStream.readUTF();
+                    txtarea.appendText("Client \n"+replay);
+                    System.out.println(replay);
+                }
+            } catch (IOException e) {
 
-        while (!masssage.equals("end")) {
-           replay =bufferedReader.readLine();
-           dataOutputStream.writeUTF(replay);
-           dataOutputStream.flush();
+                e.printStackTrace();
+            }
 
-            masssage = dataInputStream.readUTF();
-            txtarea.setText("Server"+masssage);
-        }
-        dataInputStream.close();
-        dataOutputStream.close();
-        bufferedReader.close();
-        remoteSocket.close();
-    } catch (IOException e) {
-        throw new RuntimeException(e);
+
+        }).start();
+
+
     }
+    private void appendMessageMe(String message, String style) {
+        Platform.runLater(() -> {
+            Label messageLabel = new Label(message);
+            messageLabel.setWrapText(true);
+            //messageLabel.setPrefWidth(200);
+            messageLabel.setPadding(new Insets(10));
+            messageLabel.setStyle(style);
 
-}
+            messageLabel.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+            HBox messageContainer = new HBox(messageLabel);
+            messageContainer.setAlignment(Pos.TOP_RIGHT);
+            messageContainer.setPadding(new Insets(10));
+            messageContainer.setFillHeight(true);
 
+            Label timeLabel = new Label(getCurrentTime());
+            timeLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #888888;");
+            timeLabel.setPadding(new Insets(0, 0, 5, 0));
+            HBox.setHgrow(timeLabel, Priority.ALWAYS);
 
+            VBox chatBubble = new VBox(timeLabel, messageContainer);
+            chatBubble.setAlignment(Pos.TOP_RIGHT);
+            chatBubble.setPadding(new Insets(5));
+
+            messagContainer.getChildren().add(chatBubble);
+        });
+    }
+    private String getCurrentTime() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return currentTime.format(formatter);
+    }
     @FXML
-    void btnsend(ActionEvent event) {
+    void btnsend(ActionEvent event) throws IOException {
+        dataOutputStream.writeUTF(txtmessage.getText().trim());
+        dataOutputStream.flush();
+        appendMessageMe("Me :"+ reply, "-fx-border-color: #11D2E5; -fx-background-color: #34E9FA; -fx-background-radius: 20px 0px 20px 20px; -fx-border-radius: 20px 0px 20px 20px;");
+
 
 
     }
 
+    public void btncamerOnAction(ActionEvent event) {
+        try {
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(new String("Desert.jpg"));
+
+            dataOutputStream.flush();
+           // dataOutputStream.reset();
+            int sz= Integer.parseInt(dataInputStream.readUTF());
+            System.out.println ("Receiving "+(sz/1024)+" Bytes From Sever");
+            txtarea.appendText("Receiving "+(sz/1024)+" Bytes From Sever");
+
+            byte b[]=new byte [sz];
+            int bytesRead = dataInputStream.read(b, 0, b.length);
+            for (int i = 0; i<sz; i++)
+            {
+                System.out.print(b[i]);
+                txtarea.appendText(String.valueOf(b[i]));
+            }
+
+            FileOutputStream fos=new FileOutputStream(new File("demo.jpg"));
+            fos.write(b,0,b.length);
+            System.out.println ("From Server : "+dataInputStream.readUTF());
+            txtarea.appendText("Form Server "+dataInputStream.readUTF());
+
+            
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnemoje(ActionEvent event) {
+
+
+    }
+
+    public void gringbigeyesOnAction(ActionEvent event) {
+
+    }
+
+    public void gringfacesmileonAction(ActionEvent event) {
+
+    }
+
+    public void smillyonAction(ActionEvent event) {
+
+    }
+
+    public void upsidedownonaction(ActionEvent event) {
+
+    }
+
+    public void facewithtearsjoyonAction(ActionEvent event) {
+
+    }
+
+    public void rollingfacewithtearsjoyonAction(ActionEvent event) {
+
+    }
+
+    public void vinkifaceonAction(ActionEvent event) {
+
+    }
+
+    public void savoringfoodonAction(ActionEvent event) {
+
+    }
 }
