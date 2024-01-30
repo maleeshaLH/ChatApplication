@@ -11,20 +11,35 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="716.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ClientFormcontroller">
+<AnchorPane fx:id="root" prefHeight="716.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ClientFormcontroller">
    <children>
-      <ImageView fitHeight="716.0" fitWidth="852.0">
+      <Text fx:id="nametxt" layoutX="159.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client" visible="false" wrappingWidth="126.13671875">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="namset1" layoutX="16.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kalum,Sripala,Sirimath" visible="false" wrappingWidth="395.20000000000005">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="namset" layoutX="257.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kalum,Sripala,Sirimath" visible="false" wrappingWidth="459.19995326995854">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="716.0" fitWidth="712.0">
          <image>
             <Image url="@../Img/Default%20WhatsApp%20background%20for%20people%20who%20lost%20it%20Requested%20by%20u.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="84.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clinet" wrappingWidth="152.92849731445312">
+      <Text fx:id="txtname" layoutX="84.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clinet" wrappingWidth="152.92849731445312">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Text>
-      <TextField fx:id="onmessage" layoutX="169.0" layoutY="664.0" prefHeight="51.0" prefWidth="534.0" />
-      <Button layoutX="733.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnsend" prefHeight="45.0" prefWidth="98.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+      <TextField fx:id="txttype" layoutX="169.0" layoutY="664.0" onAction="#txttypeOnAction" prefHeight="51.0" prefWidth="320.0" />
+      <Button fx:id="sendbtn" layoutX="510.0" layoutY="664.0" mnemonicParsing="false" onAction="#sendbtnOnAction" prefHeight="45.0" prefWidth="98.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="58.0">
                <image>
@@ -41,12 +56,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="87.0" prefHeight="550.0" prefWidth="847.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 10px; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="87.0" prefHeight="550.0" prefWidth="710.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 10px; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER;" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="messagContainer" prefHeight="550.0" prefWidth="845.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" />
+            <VBox fx:id="messagContainer" prefHeight="550.0" prefWidth="709.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" />
          </content>
       </ScrollPane>
-      <Button layoutX="47.0" layoutY="653.0" mnemonicParsing="false" onAction="#btnemoje" prefHeight="48.0" prefWidth="47.0">
+      <Button fx:id="btnemoji" layoutX="47.0" layoutY="653.0" mnemonicParsing="false" onAction="#btnemojiOnAction" prefHeight="48.0" prefWidth="47.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="31.0">
                <image>
