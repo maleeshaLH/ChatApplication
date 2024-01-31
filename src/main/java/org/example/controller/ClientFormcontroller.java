@@ -8,12 +8,17 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.example.ClientUtil.ClientHandler;
 
+import java.awt.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -37,17 +42,18 @@ public class ClientFormcontroller implements Initializable {
     public Text nametxt;
     public Text namset1;
     public Button btnemoji;
+    public Button btncamer;
     @FXML
     private AnchorPane root;
-
+    @FXML
+    private Text showNameBar;
     Socket socket;
     ServerSocket serverSocket;
-    String message;
+
     String replay;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
     BufferedReader bufferedReader;
-    String reply;
     String name;
     public int count =1;
     public String image;
@@ -59,9 +65,9 @@ public class ClientFormcontroller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtname.setText(LoginFormcontroller.name);
-      //  namset.setText(ServerFormcontroller.Allname.get(0));
-       // showNameBar.setText(ServerFormcontroller.Allname.get(0));
+        txtname.setText(ServerFormcontroller.name);
+        namset.setText(ServerFormcontroller.Allname.get(0));
+      //showNameBar.setText(ServerFormcontroller.Allname.get(0));
         closePane();
         new Thread(() -> {
             try {
@@ -76,31 +82,43 @@ public class ClientFormcontroller implements Initializable {
                 System.out.println(ServerFormcontroller.name);
 
 
-
-                while (true){
-                    if(ServerFormcontroller.Allname.size()>=1) {
-                        for (int i = count; i < ServerFormcontroller.Allname.size(); i++) {
-                            namset.setText(namset.getText() + "," + ServerFormcontroller.Allname.get(i));
-                            //showNameBar.setText(namset.getText());
-                            count++;
-                        }
-                    }
-
-                    replay=dataInputStream.readUTF();
-                        image=message;
-                    System.out.println(replay);
-                    appendMessage(name +" :"+ message, "-fx-border-color: #CF76FF; -fx-background-color: #CF76FF; -fx-background-radius: 0px 20px 20px 20px; -fx-border-radius: 0px 20px 20px 20px;");
-
-                }
             } catch (IOException e) {
 
                 e.printStackTrace();
+            }
+            String message ;
+
+            while (true){
+                if(ServerFormcontroller.Allname.size()>=1) {
+                    for (int i = count; i < ServerFormcontroller.Allname.size(); i++) {
+                        namset.setText(namset.getText() + "," + ServerFormcontroller.Allname.get(i));
+                        showNameBar.setText(namset.getText());
+                        count++;
+                    }
+                }
+
+                try {
+                    message=dataInputStream.readUTF();
+                    image=message;
+                    System.out.println("Server  ;"+name +"  "+message);
+                    appendMessage(name +"  :"+ message, "-fx-border-color: #CF76FF; -fx-background-color: #CF76FF; -fx-background-radius: 0px 20px 20px 20px; -fx-border-radius: 0px 20px 20px 20px;");
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
 
 
         }).start();
 
+        try {
+            Thread.sleep(500);
+            pane.setVisible(true);
 
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     public void txttypeOnAction(ActionEvent event) {
@@ -112,6 +130,8 @@ public class ClientFormcontroller implements Initializable {
     public void sendbtnOnAction(ActionEvent event) {
         printName();
         new Thread(() -> {
+            String reply;
+
 
             try {
                 reply = txttype.getText();
@@ -128,11 +148,7 @@ public class ClientFormcontroller implements Initializable {
         }).start();
 
     }
-    private void closePane() {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), pane);
-        transition.setToY(paneHeight);
-        transition.play();
-    }
+
     private void appendMessage(String message, String style) {
         if (message.matches(".*\\.(png|jpe?g|gif)$")) {
             Platform.runLater(() -> {
@@ -222,34 +238,16 @@ public class ClientFormcontroller implements Initializable {
         name = txtname.getText();
     }
     public void btncamerOnAction(ActionEvent event) {
-        try {
-            dataOutputStream.flush();
-            dataOutputStream.writeUTF(new String("Desert.jpg"));
-
-            dataOutputStream.flush();
-           // dataOutputStream.reset();
-            int sz= Integer.parseInt(dataInputStream.readUTF());
-            System.out.println ("Receiving "+(sz/1024)+" Bytes From Sever");
-           // txtarea.appendText("Receiving "+(sz/1024)+" Bytes From Sever");
-
-            byte b[]=new byte [sz];
-            int bytesRead = dataInputStream.read(b, 0, b.length);
-            for (int i = 0; i<sz; i++)
-            {
-                System.out.print(b[i]);
-                //txtarea.appendText(String.valueOf(b[i]));
-            }
-
-            FileOutputStream fos=new FileOutputStream(new File("demo.jpg"));
-            fos.write(b,0,b.length);
-            System.out.println ("From Server : "+dataInputStream.readUTF());
-           // txtarea.appendText("Form Server "+dataInputStream.readUTF());
-
-
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        printName();
+        FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
+        dialog.setMode(FileDialog.LOAD);
+        dialog.setVisible(true);
+        String file = dialog.getDirectory()+dialog.getFile();
+        dialog.dispose();
+        System.out.println(file + " chosen.");
+        if (file != null) {
+            sendFileToServer(file);
+            displayFileInScrollPane(file);
         }
     }
 
@@ -279,33 +277,72 @@ public class ClientFormcontroller implements Initializable {
     }
 
     public void smillyonAction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f642"));
     }
 
     public void upsidedownonaction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f643"));
     }
 
     public void facewithtearsjoyonAction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f602"));
     }
 
     public void rollingfacewithtearsjoyonAction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f923"));
     }
 
     public void vinkifaceonAction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f609"));
     }
 
     public void savoringfoodonAction(ActionEvent event) {
-
+        txttype.appendText(convertEmojiCode("U+1f60B"));
     }
     private String convertEmojiCode(String emojiCode) {
         int codePoint = Integer.parseInt(emojiCode.substring(2), 16);
         return new String(Character.toChars(codePoint));
     }
 
+    private void sendFileToServer(String file) {
+        try {
+            dataOutputStream.writeUTF(file);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void displayFileInScrollPane(String file) {
+        Platform.runLater(() -> {
+            try {
+                ImageView imageView = new ImageView(file);
+                imageView.setFitWidth(105);
+                imageView.setPreserveRatio(true);
 
+                VBox imageContainer = new VBox(imageView);
+                imageContainer.setAlignment(Pos.CENTER_RIGHT);
+                imageContainer.setPadding(new Insets(10));
+                imageContainer.setSpacing(10);
+
+                Label textLabel = new Label("Me : ");
+                textLabel.setWrapText(true);
+                textLabel.setAlignment(Pos.CENTER_RIGHT);
+                VBox.setMargin(textLabel, new Insets(0, 10, 0, 0));
+
+                HBox imageBox = new HBox(textLabel, imageContainer);
+                imageBox.setAlignment(Pos.CENTER_RIGHT);
+                imageBox.setSpacing(10);
+
+                messagContainer.getChildren().add(imageBox);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    private void closePane() {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), pane);
+        transition.setToY(paneHeight);
+        transition.play();
+    }
 }

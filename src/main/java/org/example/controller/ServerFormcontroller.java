@@ -36,7 +36,8 @@ public class ServerFormcontroller implements Initializable {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
     BufferedReader bufferedReader;
-    private List<ClientHandler> clients = new ArrayList<>();   static String name;
+    private List<ClientHandler> clients = new ArrayList<>();
+    static String name;
     public static ArrayList<String> Allname = new ArrayList<>();
 
 
@@ -47,7 +48,7 @@ public class ServerFormcontroller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtname.setText(LoginFormcontroller.name);
+        //txtname.setText(LoginFormcontroller.name);
         new Thread(() -> {
             try {
                 if(serverSocket==null){

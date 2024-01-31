@@ -7,39 +7,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="716.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ClientFormcontroller">
+<AnchorPane fx:id="root" prefHeight="716.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ClientFormcontroller">
    <children>
       <Text fx:id="nametxt" layoutX="159.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client" visible="false" wrappingWidth="126.13671875">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="namset1" layoutX="16.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kalum,Sripala,Sirimath" visible="false" wrappingWidth="395.20000000000005">
-         <font>
-            <Font name="System Bold Italic" size="13.0" />
-         </font>
-      </Text>
-      <Text fx:id="namset" layoutX="257.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kalum,Sripala,Sirimath" visible="false" wrappingWidth="459.19995326995854">
-         <font>
-            <Font name="System Bold Italic" size="13.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="716.0" fitWidth="712.0">
+      <ImageView fitHeight="716.0" fitWidth="517.0">
          <image>
             <Image url="@../Img/Default%20WhatsApp%20background%20for%20people%20who%20lost%20it%20Requested%20by%20u.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="txtname" layoutX="84.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clinet" wrappingWidth="152.92849731445312">
+      <TextField fx:id="txttype" layoutX="139.0" layoutY="653.0" onAction="#txttypeOnAction" prefHeight="51.0" prefWidth="262.0" promptText="      Type Hear...." style="-fx-background-radius: 30;">
          <font>
-            <Font name="System Bold Italic" size="36.0" />
-         </font>
-      </Text>
-      <TextField fx:id="txttype" layoutX="169.0" layoutY="664.0" onAction="#txttypeOnAction" prefHeight="51.0" prefWidth="320.0" />
-      <Button fx:id="sendbtn" layoutX="510.0" layoutY="664.0" mnemonicParsing="false" onAction="#sendbtnOnAction" prefHeight="45.0" prefWidth="98.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+            <Font size="18.0" />
+         </font></TextField>
+      <Button fx:id="sendbtn" layoutX="413.0" layoutY="649.0" mnemonicParsing="false" onAction="#sendbtnOnAction" prefHeight="45.0" prefWidth="98.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="58.0">
                <image>
@@ -47,7 +36,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="113.0" layoutY="655.0" mnemonicParsing="false" onAction="#btncamerOnAction">
+      <Button fx:id="btncamer" layoutX="78.0" layoutY="655.0" mnemonicParsing="false" onAction="#btncamerOnAction" style="-fx-border-color: black; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
             <ImageView fitHeight="45.0" fitWidth="30.0">
                <image>
@@ -56,12 +45,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="87.0" prefHeight="550.0" prefWidth="710.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 10px; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="87.0" prefHeight="550.0" prefWidth="517.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-color: black; -fx-border-radius: 10px; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER;" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="messagContainer" prefHeight="550.0" prefWidth="709.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" />
+            <VBox fx:id="messagContainer" prefHeight="550.0" prefWidth="515.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" />
          </content>
       </ScrollPane>
-      <Button fx:id="btnemoji" layoutX="47.0" layoutY="653.0" mnemonicParsing="false" onAction="#btnemojiOnAction" prefHeight="48.0" prefWidth="47.0">
+      <Button fx:id="btnemoji" layoutX="17.0" layoutY="655.0" mnemonicParsing="false" onAction="#btnemojiOnAction" prefHeight="54.0" prefWidth="49.0" style="-fx-border-color: black; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="31.0">
                <image>
@@ -70,7 +59,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <ScrollPane fx:id="pane" layoutX="21.0" layoutY="347.0" prefHeight="285.0" prefWidth="231.0" style="-fx-background-color: #737171; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER; -fx-background-radius: 20px;" stylesheets="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/Css/Style.css" visible="false">
+      <ScrollPane fx:id="pane" layoutX="21.0" layoutY="436.0" prefHeight="197.0" prefWidth="231.0" style="-fx-background-color: white; -fx-hbar-policy: NEVER; -fx-vbar-policy: NEVER; -fx-background-radius: 20px;" stylesheets="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/Css/Style.css" visible="false">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.86" prefHeight="289.0" prefWidth="231.0" style="-fx-background-color: #595858; -fx-background-radius: 20px;">
                <children>
@@ -80,36 +69,36 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#gringbigeyesOnAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button" stylesheets="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/Css/Style.css">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="38.0" fitWidth="38.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringbigeyesnew.png" />
+                                          <Image url="@../Img/gringbigeyesnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#gringfacesmileonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="39.0" fitWidth="41.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringfacesmilenew.png" />
+                                          <Image url="@../Img/gringfacesmilenew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" onAction="#smillyonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="37.0" fitWidth="36.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/slightlysmilingnew.png" />
+                                          <Image url="@../Img/blowingkissnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#upsidedownonaction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="44.0" fitWidth="41.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/upsidedownnew.png" />
+                                          <Image url="@../Img/upsidedownnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -120,36 +109,36 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#facewithtearsjoyonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="30.0" fitWidth="35.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/facewithtearsjoynew.png" />
+                                          <Image url="@../Img/facewithtearsjoynew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#rollingfacewithtearsjoyonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="31.0" fitWidth="35.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/rollingthefloornew.png" />
+                                          <Image url="@../Img/gringbigeyesnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" onAction="#vinkifaceonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="34.0" fitWidth="39.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/winkingfacenew.png" />
+                                          <Image url="@../Img/slightlysmilingnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#savoringfoodonAction" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="34.0" fitWidth="36.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/savoringfoodnew.png" />
+                                          <Image url="@../Img/kissnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -158,38 +147,38 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="57.0" prefHeight="41.0" prefWidth="231.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
+                              <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="37.0" fitWidth="37.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/starstrunknew.png" />
+                                          <Image url="@../Img/smileheartnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="37.0" fitWidth="33.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/kissnew.png" />
+                                          <Image url="@../Img/smilewithhearteyesnew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="35.0" fitWidth="43.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/blowingkissnew.png" />
+                                          <Image url="@../Img/starstrunknew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="31.0" fitWidth="40.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/smileheartnew.png" />
+                                          <Image url="@../Img/Ok%20Emoji%20%5BFree%20Download%20iPhone%20Emojis%5D.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -200,116 +189,36 @@
                            <children>
                               <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="41.0" fitWidth="38.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/smilewithhearteyesnew.png" />
+                                          <Image url="@../Img/winkingfacenew.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="34.0" fitWidth="41.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringfacesmilenew.png" />
+                                          <Image url="@../Img/Fearful%20Emoji%20%5BDownload%20iPhone%20Emojis%5D.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="39.0" fitWidth="37.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/slightlysmilingnew.png" />
+                                          <Image url="@../Img/Ghost%20Emoji%20%5BDownload%20iPhone%20Emojis%5D.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
                               <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
                                  <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="30.0" fitWidth="37.0">
                                        <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/upsidedownnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="152.0" prefHeight="41.0" prefWidth="231.0">
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringbigeyesnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringfacesmilenew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/slightlysmilingnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/upsidedownnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="199.0" prefHeight="41.0" prefWidth="231.0">
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringbigeyesnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/gringfacesmilenew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/slightlysmilingnew.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="hover-button">
-                                 <graphic>
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/Chat-X2/Chat-X/src/main/resources/assets/upsidedownnew.png" />
+                                          <Image url="@../Img/Poisoned%20Emoji%20%5BFree%20Download%20iPhone%20Emojis%5D.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -322,5 +231,43 @@
             </AnchorPane>
          </content>
       </ScrollPane>
+      <Pane layoutX="1.0" layoutY="3.0" prefHeight="80.0" prefWidth="520.0">
+         <children>
+            <ImageView fitHeight="55.0" fitWidth="47.0" layoutX="332.0" layoutY="3.0">
+               <image>
+                  <Image url="@../Img/Screenshot%202024-01-30%20225125.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="402.0" layoutY="7.0">
+               <image>
+                  <Image url="@../Img/Screenshot%202024-01-30%20225106.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="56.0" layoutX="14.0" layoutY="9.0">
+               <image>
+                  <Image url="@../Img/Screenshot%202024-01-30%20212716.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="txtname" layoutX="102.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clinet" wrappingWidth="152.92849731445312">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="namset" layoutX="103.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="246.936767578125">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+            <ImageView fitHeight="36.0" fitWidth="48.0" layoutX="456.0" layoutY="8.0">
+               <image>
+                  <Image url="@../Img/more.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="showNameBar" layoutX="70.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="246.936767578125">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
