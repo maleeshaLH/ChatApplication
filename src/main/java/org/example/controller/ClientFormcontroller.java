@@ -54,7 +54,8 @@ public class ClientFormcontroller implements Initializable {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
     BufferedReader bufferedReader;
-    String name;
+//    String name;
+    public static String name;
     public int count =1;
     public String image;
     private static final double paneHeight = 500;
@@ -99,10 +100,12 @@ public class ClientFormcontroller implements Initializable {
 
                 try {
                     message=dataInputStream.readUTF();
-                    image=message;
-                    System.out.println("Server  ;"+name +"  "+message);
-                    appendMessage(name +"  :"+ message, "-fx-border-color: #CF76FF; -fx-background-color: #CF76FF; -fx-background-radius: 0px 20px 20px 20px; -fx-border-radius: 0px 20px 20px 20px;");
+                    if(message != null) {
+                        image = message;
+                        System.out.println("Server  :  " + message);
 
+                        appendMessage(name + "  :" + message, "-fx-border-color: #CF76FF; -fx-background-color: #CF76FF; -fx-background-radius: 0px 20px 20px 20px; -fx-border-radius: 0px 20px 20px 20px;");
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
